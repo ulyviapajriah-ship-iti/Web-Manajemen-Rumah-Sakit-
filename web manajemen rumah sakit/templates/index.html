@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Rumah Sakit Terintegrasi (Semester 2 Tugas Besar)</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #F8FAFC; color: #0F172A; margin: 0; padding: 0; }
+        .navbar { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: bold; color: #0F172A; }
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; margin-bottom: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-weight: 600; margin-bottom: 6px; color: #475569; }
+        input, select { padding: 10px; border: 1px solid #CBD5E1; border-radius: 6px; margin-bottom: 15px; background-color: #F8FAFC; }
+        .btn { padding: 12px; border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; }
+        .btn-block { display: block; width: 100%; box-sizing: border-box; text-align: center; margin-top: 10px; }
+        .btn-success { background-color: #059669; }
+        .btn-primary { background-color: #4F46E5; }
+        .btn-danger { background-color: #DC2626; }
+        .btn-info { background-color: #0284C7; }
+        .btn-warning { background-color: #D97706; }
+        
+        /* Tabel Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; border-bottom: 1px solid #E2E8F0; text-align: left; }
+        th { background-color: #F1F5F9; color: #475569; }
+        .txt-code { font-family: monospace; color: #4F46E5; font-weight: bold; background: #EEF2F6; padding: 2px 6px; border-radius: 4px;}
+        
+        /* Visualizer Styles */
+        .queue-visualizer { display: flex; overflow-x: auto; padding: 15px 0; gap: 12px; }
+        .queue-card { background-color: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 8px; padding: 15px; min-width: 140px; text-align: center; }
+        .front-node { border-color: #059669; background-color: #E6F4EA; }
+        .stack-visualizer { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
+        .stack-card { background-color: #FFFFFF; border: 1px solid #E2E8F0; padding: 12px 20px; border-radius: 6px; display: flex; justify-content: space-between; }
+        .top-node { border-color: #4F46E5; background-color: #EEF2F6; }
+        
+        /* Linked List Visualizer */
+        .dll-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 15px; }
+        .dll-node { background: #FAF5FF; border: 2px solid #9333EA; border-radius: 10px; padding: 15px; width: 260px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
+        .dll-ptr { font-family: monospace; font-size: 11px; color: #7C3AED; background: #F3E8FF; padding: 4px; border-radius: 4px; margin: 4px 0; }
+        
+        /* Alerts */
+        .alert { padding: 12px; border-radius: 6px; margin-bottom: 15px; font-weight: 500; }
+        .alert-success { background-color: #D1FAE5; color: #065F46; }
+        .alert-info { background-color: #E0F2FE; color: #0369A1; }
+        .alert-danger { background-color: #FEE2E2; color: #991B1B; }
+        .alert-warning { background-color: #FEF3C7; color: #92400E; }
+        pre { background: #0F172A; color: #38BDF8; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">🏥 Manajemen Rumah Sakit</div>
+        <div>Mata Kuliah: <strong>Algoritma & Struktur Data</strong></div>
+    </header>
+
+    <div class="container">
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <section class="card">
+            <h2>📊 1. Analisis Kompleksitas Sistem (Materi: Big O Notation)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modul Operasional</th>
+                        <th>Struktur Data / Algoritma</th>
+                        <th>Time Complexity (Worst Case)</th>
+                        <th>Keterangan Implementasi Teoretis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pendaftaran Antrean</td>
+                        <td>Queue (FIFO List)</td>
+                        <td class="txt-code">O(1)</td>
+                        <td>Menambahkan data pasien baru ke ujung belakang barisan (*Rear*).</td>
+                    </tr>
+                    <tr>
+                        <td>Gudang Resep Apotek</td>
+                        <td>Stack (LIFO List)</td>
+                        <td class="txt-code">O(1)</td>
+                        <td>Menaruh dan mengambil resep dari tumpukan paling atas (*Top*).</td>
+                    </tr>
+                    <tr>
+                        <td>Triase Kegawatdaruratan</td>
+                        <td>Bubble Sort Algorithm</td>
+                        <td class="txt-code">O(n²)</td>
+                        <td>Membandingkan tingkat keparahan dua pasien bersebelahan berulang-ulang.</td>
+                    </tr>
+                    <tr>
+                        <td>Kalkulator Jaminan</td>
+                        <td>Fungsi Rekursif</td>
+                        <td class="txt-code">O(n)</td>
+                        <td>Memanggil diri sendiri sebanyak <span class="txt-code">n</span> kali pemotongan layer asuransi.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>📜 2. Perancangan Logika Program (Materi: Flowchart & Pseudocode)</h2>
+            <p>Berikut adalah bentuk representasi algoritma penyusunan <strong>Stack (Push)</strong> resep obat pada modul apotek kami:</p>
+            <pre>
+PROCEDURE push_resep(STACK obat, STRING nama_obat, INT jumlah_butir)
+    IF ukuran_stack >= MAKSIMAL_MEMORI THEN
+        PRINT "Tumpukan penuh / Stack Overflow"
+    ELSE
+        TAMBAHKAN nama_obat DAN jumlah_butir KE TOP OF STACK
+        PRINT "Resep berhasil ditambahkan"
+    ENDIF
+ENDPROCEDURE</pre>
+        </section>
+
+        <div class="grid-2col">
+            
+            <div class="card">
+                <h2>👥 3. Modul Antrean Poliklinik (Materi: Queue & Array)</h2>
+                <p>Sistem antrean loket menggunakan prinsip <strong>First-In, First-Out (FIFO)</strong>. Data Poliklinik diambil dari master <strong>Array Dinamis</strong> Python.</p>
+                <hr>
+                
+                <form action="/enqueue" method="POST" class="form-group">
+                    <label>Nama Pasien Baru:</label>
+                    <input type="text" name="patient_name" placeholder="Masukkan nama pasien" required>
+                    
+                    <label>Pilih Poliklinik (Master Array):</label>
+                    <select name="dept_name">
+                        {% for poli in polis %}
+                            <option value="{{ poli }}">Poli {{ poli }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <button type="submit" class="btn btn-success btn-block">Daftarkan Pasien (Enqueue)</button>
+                </form>
+                
+                <a href="/dequeue" class="btn btn-info btn-block">Panggil & Layani Pasien Terdepan (Dequeue)</a>
+
+                <h3>Kondisi Fisik Jalur Antrean (Queue):</h3>
+                <div class="queue-visualizer">
+                    {% for p in queue %}
+                        <div class="queue-card {% if loop.first %}front-node{% endif %}">
+                            <span style="font-size: 10px; font-weight: bold; color: #475569;">
+                                {% if loop.first %}⭐ FRONT (Utama){% else %}Antrean ke-{{ loop.index }}{% endif %}
+                            </span>
+                            <h4>{{ p.name }}</h4>
+                            <p style="font-size: 12px; margin: 0;">{{ p.id }} | Poli {{ p.dept }}</p>
+                        </div>
+                    {% else %}
+                        <p style="color: #94A3B8; font-style: italic;">Tidak ada antrean hari ini.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>💊 4. Modul Racikan Apotek (Materi: Push & Pop Stack)</h2>
+                <p>Sistem tumpukan nota resep obat apotek yang menerapkan aturan <strong>Last-In, First-Out (LIFO)</strong>.</p>
+                <hr>
+
+                <form action="/push" method="POST" class="form-group">
+                    <label>Nama Sediaan Obat:</label>
+                    <input type="text" name="med_name" placeholder="Contoh: Metformin 500mg" required>
+                    
+                    <label>Jumlah Butir:</label>
+                    <input type="number" name="qty" placeholder="Masukkan angka" required>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Tambahkan Nota Obat (Push Stack)</button>
+                </form>
+
+                <a href="/pop" class="btn btn-danger btn-block">Batalkan Obat Paling Atas (Pop Stack)</a>
+
+                <h3>Struktur Tumpukan Nota (Stack):</h3>
+                <div class="stack-visualizer">
+                    {% for item in stack %}
+                        <div class="stack-card {% if loop.first %}top-node{% endif %}">
+                            <span>💊 <strong>{{ item.name }}</strong> ({{ item.qty }} pcs)</span>
+                            <span class="txt-code" style="font-size: 10px;">
+                                {% if loop.first %}🔝 TOP OF STACK{% else %}Frame Memori{% endif %}
+                            </span>
+                        </div>
+                    {% else %}
+                        <p style="color: #94A3B8; font-style: italic; text-align: center;">Tumpukan resep kosong.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <section class="card">
+            <h2>📂 5. Database Rekam Medis (Materi: Double Linked List)</h2>
+            <p>Menampilkan hubungan rekam medis berantai dua arah menggunakan alamat penunjuk pointer <strong>PREV Node Address</strong> dan <strong>NEXT Node Address</strong>.</p>
+            <div class="dll-container">
+                {% for node in records %}
+                    <div class="dll-node">
+                        <div style="font-weight: bold; color: #9333EA;">Alamat Node: {{ node.addr }}</div>
+                        <hr style="border: 0.5px solid #E9D5FF;">
+                        <h4 style="margin: 5px 0;">{{ node.id }} - {{ node.name }}</h4>
+                        <p style="font-size: 13px; margin: 4px 0;">Diagnosis: <em>{{ node.diag }}</em></p>
+                        <hr style="border: 0.5px solid #E9D5FF;">
+                        <div class="dll-ptr">⬅️ POINTER PREV: <strong>{{ node.prev }}</strong></div>
+                        <div class="dll-ptr">➡️ POINTER NEXT: <strong>{{ node.next }}</strong></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <div class="grid-2col">
+            
+            <div class="card">
+                <h2>🚨 6. Urutan Prioritas Ranjang UGD (Materi: Bubble Sort)</h2>
+                <p>Mengurutkan data pasien UGD secara dinamis agar tingkat kedaruratan tertinggi otomatis bergeser ke barisan paling depan.</p>
+                <hr>
+                <a href="/sort_ugd" class="btn btn-warning btn-block">⚡ Jalankan Bubble Sort Pasien UGD</a>
+                
+                <table style="margin-top: 15px;">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Keluhan UGD</th>
+                            <th>Level Kritis (1-5)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for u in ugd %}
+                        <tr style="{% if u.priority == 1 %}background-color: #FEE2E2; font-weight: bold;{% endif %}">
+                            <td>{{ u.name }}</td>
+                            <td>{{ u.illness }}</td>
+                            <td>
+                                <span class="txt-code" style="background: {% if u.priority == 1 %}#EF4444; color:white;{% else %}#CBD5E1;{% endif %}">
+                                    Level {{ u.priority }} {% if u.priority == 1 %}(Paling Kritis){% endif %}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>🧮 7. Kalkulator Penjaminan Berlapis (Materi: Fungsi Rekursif)</h2>
+                <p>Menghitung total potongan biaya rumah sakit secara otomatis dengan fungsi rekursif bersarang (diskon 10% per lapisan).</p>
+                <hr>
+                
+                <form action="/" method="GET" class="form-group">
+                    <label>Total Tagihan Awal (Rp):</label>
+                    <input type="number" name="biaya_awal" value="{{ biaya_awal or 5000000 }}" required>
+                    
+                    <label>Jumlah Lapisan Jaminan JKN / Asuransi (Layer Rekursi):</label>
+                    <input type="number" name="layer" value="{{ layer_count or 3 }}" max="10" min="1" required>
+                    
+                    <button type="submit" class="btn btn-success btn-block">Hitung Lewat Call Stack Rekursif</button>
+                </form>
+
+                {% if biaya_akhir %}
+                    <div style="background-color: #F1F5F9; padding: 12px; border-radius: 6px; border-left: 4px solid #059669;">
+                        <strong>Hasil Akhir Setelah Rekursi:</strong>
+                        <h3 style="margin: 5px 0; color: #059669;">Rp {{ "{:,.2f}".format(biaya_akhir) }}</h3>
+                    </div>
+                    
+                    <h5 style="margin-bottom: 5px;">Jejak Pemanggilan Call Stack Memori:</h5>
+                    <ul style="font-size: 12px; font-family: monospace; padding-left: 20px; color: #475569;">
+                        {% for log in rekursif_logs %}
+                            <li>{{ log }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

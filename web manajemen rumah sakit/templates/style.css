@@ -1,0 +1,164 @@
+/* PENGATURAN DASAR TEMA TERANG */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F8FAFC;
+    color: #0F172A;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0F172A;
+}
+
+.badge-online {
+    background-color: #10B981;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* KOMPONEN KOTAK (CARD) */
+.card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* DESIGN TOMBOL DAN FORM */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #475569;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background-color: #F8FAFC;
+}
+
+.btn {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-block { display: block; margin-top: 10px; }
+.btn-success { background-color: #059669; }
+.btn-primary { background-color: #4F46E5; }
+.btn-danger { background-color: #DC2626; }
+.btn-info { background-color: #0284C7; }
+
+/* TABEL BIG O */
+.table-bigo {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-bigo th, .table-bigo td {
+    padding: 12px;
+    border-bottom: 1px solid #E2E8F0;
+    text-align: left;
+}
+
+.table-bigo th { background-color: #F1F5F9; color: #475569;}
+.txt-code { font-family: monospace; color: #4F46E5; font-weight: bold;}
+
+/* VISUALISASI ANTRIAN (QUEUE) & STACK */
+.queue-visualizer {
+    display: flex;
+    overflow-x: auto;
+    padding: 15px 0;
+    gap: 12px;
+}
+
+.queue-card {
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 140px;
+    text-align: center;
+}
+
+.front-node { border-color: #059669; background-color: #E6F4EA;}
+
+.stack-visualizer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.stack-card {
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    padding: 12px 20px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-node { border-color: #4F46E5; background-color: #EEF2F6;}
+
+.node-badge, .stack-badge {
+    font-size: 10px;
+    font-weight: bold;
+    color: #64748B;
+}
+
+/* NOTIFIKASI */
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.alert-success { background-color: #D1FAE5; color: #065F46; }
+.alert-info { background-color: #E0F2FE; color: #0369A1; }
+.alert-danger { background-color: #FEE2E2; color: #991B1B; }
+.alert-warning { background-color: #FEF3C7; color: #92400E; }
+.empty-text { color: #94A3B8; font-style: italic; text-align: center; }
